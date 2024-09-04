@@ -1,0 +1,12 @@
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: ""
+
+keycloak:
+  subscription:
+    channel: stable-v24
+    installPlanApproval: Automatic
+    name: rhbk-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace

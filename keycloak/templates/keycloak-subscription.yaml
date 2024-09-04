@@ -1,0 +1,14 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ include "keycloak.name" . }}-operator
+  namespace: {{ include "keycloak.namespace" . }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  channel: {{ .Values.keycloak.subscription.channel }}
+  installPlanApproval: {{ .Values.keycloak.subscription.installPlanApproval }}
+  name: {{ .Values.keycloak.subscription.name }}
+  source: {{ .Values.keycloak.subscription.source }}
+  sourceNamespace: {{ .Values.keycloak.subscription.sourceNamespace }}
