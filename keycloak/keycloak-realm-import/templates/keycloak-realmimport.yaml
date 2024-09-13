@@ -386,8 +386,8 @@ spec:
         enabled: true
         totp: false
         emailVerified: true
-        firstName: ''
-        lastName: ''
+        firstName: '{{ $loop }}'
+        lastName: 'rhdh'
         email: {{ $loop }}@opentlc.com
         credentials:
           - type: password
