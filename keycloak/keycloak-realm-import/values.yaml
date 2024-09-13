@@ -23,6 +23,11 @@ hook:
         - ALL
   maxTimeToWait: 120000
 
+users:
+  count: 5
+  prefix: user
+  password:
+
 argocd:
   enabled: true
   syncwave: "-1"

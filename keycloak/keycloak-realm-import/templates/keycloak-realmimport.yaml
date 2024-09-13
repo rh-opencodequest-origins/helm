@@ -379,7 +379,26 @@ spec:
     webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister: false
     webAuthnPolicyPasswordlessAcceptableAaguids: []
     webAuthnPolicyPasswordlessExtraOrigins: []
-    users: []
+    users:
+{{- range untilStep 0 (.Values.users.count | int64 | int) 1 }}
+{{- $loop := printf "%s%s" $.Values.users.prefix ((add . 1) | toString) }}
+      - username: {{ $loop }}
+        enabled: true
+        totp: false
+        emailVerified: true
+        firstName: ''
+        lastName: ''
+        email: {{ $loop }}@opentlc.com
+        credentials:
+          - type: password
+            value: {{ $.Values.users.password }}
+        disableableCredentialTypes: []
+        requiredActions: []
+        realmRoles:
+          - default-roles-{{ $.Values.realm.name }}
+        notBefore: 0
+        groups: []
+{{- end }}
     scopeMappings:
         - clientScope: offline_access
           roles:
