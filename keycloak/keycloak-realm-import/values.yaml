@@ -28,6 +28,11 @@ users:
   prefix: user
   password:
 
+backstage:
+  redirectUri:
+  webOrigin:
+  secret:
+
 argocd:
   enabled: true
   syncwave: "-1"

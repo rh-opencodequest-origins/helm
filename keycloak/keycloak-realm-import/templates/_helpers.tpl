@@ -75,3 +75,14 @@ argocd.argoproj.io/sync-wave: "{{ .Values.argocd.syncwave }}"
 {{- "{}" }}
 {{- end }}
 {{- end }}
+
+{{/*
+Backstage client secret
+*/}}
+{{- define "keycloak-realmimport.client-backstage-secret" -}}
+{{- if .Values.backstage.secret }}
+{{- .Values.backstage.secret }}
+{{- else }}
+{{- randAlphaNum 32 }}
+{{- end }}
+{{- end }}
