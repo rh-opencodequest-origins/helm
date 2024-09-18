@@ -5,7 +5,6 @@ metadata:
   name: "{{ include "keycloak-operator.name" . }}-operatorgroup"
   namespace: {{ include "keycloak-operator.namespace" . }}
   annotations:
-  annotations:
     {{- include "keycloak-operatorgroup.argocd-syncwave" . | nindent 4 }}
 spec:
   targetNamespaces:
