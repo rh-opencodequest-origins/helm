@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "quay-registry.labels" . | nindent 4 }}
   annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     {{- include "quay-registry.quay.argocd-syncwave" . | nindent 4 }}
 spec:
   configBundleSecret: {{ include "quay-registry.name" . }}-config-bundle
