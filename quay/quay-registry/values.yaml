@@ -5,7 +5,8 @@ quay:
   host:
   tls: true
   configureAdmin: true
-  superUser: quayadmin
+  adminUser: quayadmin
+  adminUserPassword: 
   userInitialize: true
   component:
     postgres:
@@ -62,3 +63,5 @@ argocd:
     syncwave: "-2"
   quay:
     syncwave: "0"
+  config:
+    syncwave: "1"

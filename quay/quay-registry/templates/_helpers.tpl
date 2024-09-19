@@ -90,3 +90,18 @@ argocd.argoproj.io/sync-wave: "{{ .Values.argocd.quay.syncwave }}"
 {{- "{}" }}
 {{- end }}
 {{- end }}
+
+{{/*
+ArgoCD Syncwave
+*/}}
+{{- define "quay-registry.config.argocd-syncwave" -}}
+{{- if .Values.argocd }}
+{{- if and (.Values.argocd.config.syncwave) (.Values.argocd.enabled) -}}
+argocd.argoproj.io/sync-wave: "{{ .Values.argocd.config.syncwave }}"
+{{- else }}
+{{- "{}" }}
+{{- end }}
+{{- else }}
+{{- "{}" }}
+{{- end }}
+{{- end }}
