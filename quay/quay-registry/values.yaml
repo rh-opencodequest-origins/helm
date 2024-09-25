@@ -57,6 +57,10 @@ noobaa:
   name: noobaa
   namespace: openshift-storage
 
+vault:
+  name: vault
+  namespace: vault
+
 argocd:
   enabled: true
   noobaa:

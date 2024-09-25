@@ -10,7 +10,8 @@ data:
     - name: Config Quay registry
       hosts: localhost
       vars:
-
+        vault_namespace: {{ $.Values.vault.namespace }}
+        vault_name: {{ $.Values.vault.name }}
       tasks:
         - name: Check QuayRegistry status 
           kubernetes.core.k8s_info:
@@ -122,3 +123,30 @@ data:
           until: _r_ext_quay_token_exp.rc == 0
           retries: 5
           delay: 30
+
+        - name: Retrieve Vault Pod
+          kubernetes.core.k8s_info:
+            kind: Pod
+            name: {{ .Values.vault.name }}-0
+            namespace: {{ .Values.vault.namespace }}
+          register: r_vault
+          retries: 120
+          delay: 5
+          until:
+            - r_vault.resources is defined
+            - r_vault.resources | length > 0
+            - r_vault.resources[0].status is defined
+            - r_vault.resources[0].status.phase is defined
+            - r_vault.resources[0].status.phase == 'Running'
+
+        - name: Create vault secrets for Quay access
+          vars:
+            quay_auth: "{{ .Values.quay.adminUser }}:{{ .Values.quay.adminUserPassword }}"
+          kubernetes.core.k8s_exec:
+            namespace: {{ .Values.vault.namespace }}
+            pod: {{ .Values.vault.namespace }}-0
+            command: '{{ "{{" }} item {{ "}}" }}'
+          loop:
+            - 'vault kv put kv/secrets/rhdh/registry/auth value={{ "{{" }} quay_auth | b64encode {{ "}}" }}'
+            - "vault kv put kv/secrets/rhdh/registry/username value={{ .Values.quay.adminUser }}"
+            - "vault kv put kv/secrets/rhdh/registry/password value={{ .Values.quay.adminUserPassword }}"
