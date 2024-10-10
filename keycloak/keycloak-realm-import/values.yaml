@@ -24,14 +24,18 @@ hook:
   maxTimeToWait: 120000
 
 users:
-  count: 5
-  prefix: user
-  password:
+  
+groups:
 
-backstage:
-  redirectUri:
-  webOrigin:
-  secret:
+client:
+  backstage:
+    redirectUri:
+    webOrigin:
+    secret:
+  backstagePlugin:
+    redirectUri:
+    webOrigin:
+    secret:
 
 argocd:
   enabled: true

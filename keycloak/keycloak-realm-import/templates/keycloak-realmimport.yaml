@@ -333,7 +333,15 @@ spec:
             clientRole: true
             containerId: {{ $accountContainerId }}
             attributes: {}
-    groups: []
+    groups:
+{{- range $item := .Values.groups }}
+      - name: {{ $item.name }}
+        path: "/{{ $item.name }}"
+        subGroups: []
+        attributes: {}
+        realmRoles: []
+        clientRoles: {}
+{{- end }}
     defaultRole:
       id: {{ uuidv4 }}
       name: default-roles-{{ $.Values.realm.name }}
@@ -380,24 +388,43 @@ spec:
     webAuthnPolicyPasswordlessAcceptableAaguids: []
     webAuthnPolicyPasswordlessExtraOrigins: []
     users:
-{{- range untilStep 0 (.Values.users.count | int64 | int) 1 }}
-{{- $loop := printf "%s%s" $.Values.users.prefix ((add . 1) | toString) }}
-      - username: {{ $loop }}
+      - id: {{ uuidv4 }}
+        username: service-account-{{ .Values.realm.name }}-plugin
+        emailVerified: false
+        enabled: true
+        totp: false
+        serviceAccountClientId: {{ .Values.realm.name }}-plugin
+        disableableCredentialTypes: []
+        requiredActions: []
+        realmRoles:
+          - default-roles-{{ .Values.realm.name }}
+        clientRoles:
+          realm-management:
+            - query-users
+            - view-users
+            - query-groups
+        notBefore: 0
+        groups: []
+{{- range $item := .Values.users }}
+      - username: {{ $item.id }}
         enabled: true
         totp: false
         emailVerified: true
-        firstName: '{{ $loop }}'
+        firstName: '{{ $item.id }}'
         lastName: 'rhdh'
-        email: {{ $loop }}@opentlc.com
+        email: {{ $item.id }}@rhdemo.com
         credentials:
           - type: password
-            value: {{ $.Values.users.password }}
+            value: {{ $item.password }}
         disableableCredentialTypes: []
         requiredActions: []
         realmRoles:
           - default-roles-{{ $.Values.realm.name }}
         notBefore: 0
-        groups: []
+        groups:
+{{- range $item1 := $item.groups }}
+          - {{ $item1 }}
+{{- end }}
 {{- end }}
     scopeMappings:
         - clientScope: offline_access
@@ -538,9 +565,85 @@ spec:
         clientAuthenticatorType: client-secret
         secret: {{ include "keycloak-realmimport.client-backstage-secret" . }}
         redirectUris:
-          - {{ .Values.backstage.redirectUri }}
+          - {{ .Values.client.backstage.redirectUri }}
         webOrigins:
-          - '{{ .Values.backstage.webOrigin }}'
+          - '{{ .Values.client.backstage.webOrigin }}'
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: true
+        serviceAccountsEnabled: true
+        publicClient: false
+        frontchannelLogout: true
+        protocol: openid-connect
+        attributes:
+          oidc.ciba.grant.enabled: 'false'
+          backchannel.logout.session.required: 'true'
+          display.on.consent.screen: 'false'
+          oauth2.device.authorization.grant.enabled: 'false'
+          backchannel.logout.revoke.offline.tokens: 'false'
+        authenticationFlowBindingOverrides: {}
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: -1
+        protocolMappers:
+          - id: {{ uuidv4 }}
+            name: Client IP Address
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: clientAddress
+              introspection.token.claim: 'true'
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: clientAddress
+              jsonType.label: String
+          - id: {{ uuidv4 }}
+            name: Client ID
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: client_id
+              introspection.token.claim: 'true'
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: client_id
+              jsonType.label: String
+          - id: {{ uuidv4 }}
+            name: Client Host
+            protocol: openid-connect
+            protocolMapper: oidc-usersessionmodel-note-mapper
+            consentRequired: false
+            config:
+              user.session.note: clientHost
+              introspection.token.claim: 'true'
+              id.token.claim: 'true'
+              access.token.claim: 'true'
+              claim.name: clientHost
+              jsonType.label: String
+        defaultClientScopes:
+          - profile
+          - roles
+          - email
+        optionalClientScopes:
+          - web-origins
+          - acr
+          - address
+          - phone
+          - offline_access
+          - microprofile-jwt
+      - id: {{ uuidv4 }}
+        clientId: {{ .Values.realm.name }}-plugin
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        secret: {{ include "keycloak-realmimport.client-backstage-plugin-secret" . }}
+        redirectUris: []
+        webOrigins: []
         notBefore: 0
         bearerOnly: false
         consentRequired: false
@@ -1198,7 +1301,7 @@ spec:
           config:
             allow-default-scopes:
             - 'true'
-        - id: 47068adc-cec9-4549-8297-40a51d08b079
+        - id: {{ uuidv4 }}
           name: Consent Required
           providerId: consent-required
           subType: anonymous
@@ -1783,7 +1886,7 @@ spec:
       parRequestUriLifespan: '60'
       cibaInterval: '5'
       realmReusableOtpCode: 'false'
-    keycloakVersion: 24.0.7.redhat-00004
+    keycloakVersion: 24.0.8.redhat-00004
     userManagedAccessAllowed: false
     clientProfiles:
       profiles: []
