@@ -558,7 +558,7 @@ spec:
           - offline_access
           - microprofile-jwt
       - id: {{ uuidv4 }}
-        clientId: {{ .Values.realm.name }}
+        clientId: {{ .Values.client.backstage.name }}
         surrogateAuthRequired: false
         enabled: true
         alwaysDisplayInConsole: false
@@ -636,7 +636,7 @@ spec:
           - offline_access
           - microprofile-jwt
       - id: {{ uuidv4 }}
-        clientId: {{ .Values.realm.name }}-plugin
+        clientId: {{ .Values.client.backstagePlugin.name }}
         surrogateAuthRequired: false
         enabled: true
         alwaysDisplayInConsole: false

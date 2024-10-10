@@ -29,10 +29,12 @@ groups:
 
 client:
   backstage:
+    name:
     redirectUri:
     webOrigin:
     secret:
   backstagePlugin:
+    name:
     redirectUri:
     webOrigin:
     secret:
