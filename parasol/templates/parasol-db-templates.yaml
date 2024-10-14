@@ -79,7 +79,7 @@ data:
           vars:
             parasol_db_argocd_name: "{{ $.Values.parasol.db.dev.argocd.name }}"
             parasol_db_argocd_namespace: "{{ $.Values.parasol.db.dev.argocd.namespace }}"
-            parasol_db_repo_url: "https://{{ $.Values.gitlab.host }}/parasol/{{ $item.project }}"
+            parasol_db_repo_url: "https://{{ $.Values.gitlab.host }}/parasol/{{ $item.project }}.git"
             parasol_db_repo_revision: "{{ $item.branch }}"
             parasol_db_namespace: "{{ $.Values.parasol.db.dev.namespace }}"
 {{- end }}
