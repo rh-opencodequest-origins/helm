@@ -9,9 +9,6 @@ parasol:
   group: parasol
   db:
     templates: []
-    applications: []
-    dev:
-      argocd:
-        name: parasol-db
-        namespace:
+    argocd:
+      name: parasol-db
       namespace:

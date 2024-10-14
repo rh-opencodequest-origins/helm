@@ -77,11 +77,11 @@ data:
             dest: /tmp/{{ $item.project }}/{{ $item1 }}
             mode: "0660"         
           vars:
-            parasol_db_argocd_name: "{{ $.Values.parasol.db.dev.argocd.name }}"
-            parasol_db_argocd_namespace: "{{ $.Values.parasol.db.dev.argocd.namespace }}"
+            parasol_db_argocd_name: "{{ $.Values.parasol.db.argocd.name }}"
+            parasol_db_argocd_namespace: "{{ $.Values.parasol.db.argocd.namespace }}"
             parasol_db_repo_url: "https://{{ $.Values.gitlab.host }}/parasol/{{ $item.project }}.git"
             parasol_db_repo_revision: "{{ $item.branch }}"
-            parasol_db_namespace: "{{ $.Values.parasol.db.dev.namespace }}"
+            parasol_db_namespace: "{{ $item.namespace }}"
 {{- end }}
 
         - name: Add new files to the repository
@@ -108,7 +108,7 @@ data:
 
 {{- range $item2 := $item.applications }}
 
-        - name: Deploy application {{ $item }}
+        - name: Deploy application {{ $item2 }}
           kubernetes.core.k8s:
             state: present
             definition: "{{ "{{" }} lookup('file', '/tmp/{{ $item.project }}/{{ $item2 }}') | from_yaml {{ "}}" }}"
