@@ -106,4 +106,12 @@ data:
             cmd: >-
               git push {{ "{{" }} _git_template_repo_url {{ "}}" }}
 
+{{- range $item2 := $item.applications }}
+
+        - name: Deploy application {{ $item }}
+          kubernetes.core.k8s:
+            state: present
+            definition: "{{ "{{" }} lookup('file', '/tmp/{{ $item.project }}/{{ $item2 }}') | from_yaml {{ "}}" }}"
+{{- end }}
+
 {{- end }}

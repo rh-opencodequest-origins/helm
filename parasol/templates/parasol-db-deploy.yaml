@@ -1,0 +1,68 @@
+kind: ConfigMap
+metadata:
+  name:  parasol-db-deploy
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+apiVersion: v1
+data:
+  playbook.yaml: |
+    ---
+    - name: Parasol templates
+      hosts: localhost
+      tasks:
+        - name: Check existence of group
+          ansible.builtin.uri:
+            url: https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/api/v4/groups/{{ $.Values.parasol.group }}
+            method: GET
+            validate_certs: false
+          register: r_liveness
+          retries: 120
+          delay: 10
+          until: r_liveness.status == 200
+
+        - name: Git config
+          ansible.builtin.command: git config --global user.email "{{ $.Values.gitlab.email.address }}"
+          ignore_errors: true
+
+        - name: Git config
+          ansible.builtin.command: git config --global user.name "{{ $.Values.gitlab.email.displayName }}"
+          ignore_errors: true
+
+        - name: Build git repo url
+          ansible.builtin.set_fact:
+            _git_template_repo_url: https://{{ $.Values.gitlab.host }}/{{ $.Values.parasol.group }}/{{ $.Values.parasol.db.dev.project }}
+
+        - name: Remove older repo folders
+          shell: rm -rf /tmp/{{ $.Values.parasol.db.dev.project }}
+
+        - name: Check existence of git repo
+          ansible.builtin.uri:
+            url: '{{ "{{" }} _git_template_repo_url {{ "}}" }}'
+            method: GET
+            validate_certs: false
+          register: r_liveness
+          retries: 60
+          delay: 10
+          until: r_liveness.status == 200
+
+        - name: Clone {{ $.Values.parasol.db.dev.project }}
+          ansible.builtin.git:
+            accept_hostkey: true
+            force: true
+            repo: '{{ "{{" }} _git_template_repo_url {{ "}}" }}'
+            dest: "/tmp/{{ $.Values.parasol.db.dev.project }}"
+            version: "{{ $.Values.parasol.db.dev.branch }}"
+          environment:
+            GIT_SSL_NO_VERIFY: "true"
+          register: r_git_clone
+          retries: 60
+          delay: 10
+          until: r_git_clone is not failed
+
+{{- range $item := .Values.parasol.db.dev.applications }}
+
+        - name: Deploy application {{ $item }}
+          kubernetes.core.k8s:
+            state: present
+            definition: "{{ "{{" }} lookup('file', '/tmp/{{ $.Values.parasol.db.dev.project }}/{{ $item }}') | from_yaml {{ "}}" }}"
+{{- end }}
