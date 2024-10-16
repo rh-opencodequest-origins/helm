@@ -12,3 +12,12 @@ parasol:
     argocd:
       name: parasol-db
       namespace:
+  store:
+    templates: []
+    argocd:
+      name: parasol-store
+      namespace:
+
+registry:
+  username:
+  password:
