@@ -154,7 +154,7 @@ data:
 {{- range $item := .Values.quay.organizations }}
         - name: Create organization {{ $item }}
           ansible.builtin.uri:
-            url: '{{ "{{" }} r_quay_registry.resources[0].status.registryEndpoint {{ "}}" }}/api/v1/organization'
+            url: '{{ "{{" }} r_quay_registry.resources[0].status.registryEndpoint {{ "}}" }}/api/v1/organization/'
             method: POST
             headers:
               Authorization: 'Bearer {{ "{{" }} r_quayadmin.json.access_token {{ "}}" }}'
