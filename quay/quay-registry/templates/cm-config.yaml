@@ -150,3 +150,17 @@ data:
             - 'vault kv put kv/secrets/rhdh/registry/auth value={{ "{{" }} quay_auth | b64encode {{ "}}" }}'
             - "vault kv put kv/secrets/rhdh/registry/username value={{ .Values.quay.adminUser }}"
             - "vault kv put kv/secrets/rhdh/registry/password value={{ .Values.quay.adminUserPassword }}"
+
+{{- range $item := .Values.quay.organizations }}
+        - name: Create organization {{ $item }}
+          ansible.builtin.uri:
+            url: '{{ "{{" }} r_quay_registry.resources[0].status.registryEndpoint {{ "}}" }}/api/v1/organization'
+            method: POST
+            headers:
+              Authorization: 'Bearer {{ "{{" }} r_quayadmin.json.access_token {{ "}}" }}'
+            body:
+              name: {{ $item }}
+            body_format: json
+            validate_certs: false
+            status_code: 201
+{{- end }}

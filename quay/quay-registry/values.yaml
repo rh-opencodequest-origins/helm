@@ -51,6 +51,7 @@ quay:
           requests:
             cpu: 125m
             memory: 1Gi
+  organizations: []
 
 
 noobaa:
