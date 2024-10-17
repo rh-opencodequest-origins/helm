@@ -88,11 +88,11 @@ data:
             parasol_web_image_registry_image_tag: "{{ $item.image.tag }}"
             parasol_web_image_registry_username: "{{ $.Values.registry.username }}"
             parasol_web_image_registry_password: "{{ $.Values.registry.password }}"
-            parasol_web_store_app_url: "{{ $.Values.store.url }}"
-            parasol_web_store_app_service: "{{ $.Values.store.service }}"
-            parasol_web_sso_url: "{{ $.Values.sso.url }}"
-            parasol_web_sso_client: "{{ $.Values.sso.client }}"
-            parasol_web_sso_logout_url: "{{ $.Values.sso.logoutUrl }}"
+            parasol_web_store_app_url: "{{ $item.store.url }}"
+            parasol_web_store_app_service: "{{ $item.store.service }}"
+            parasol_web_sso_url: "{{ $item.sso.url }}"
+            parasol_web_sso_client: "{{ $item.sso.client }}"
+            parasol_web_sso_logout_url: "{{ $item.sso.logoutUrl }}"
 {{- end }}
 
         - name: Add new files to the repository

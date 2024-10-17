@@ -26,12 +26,3 @@ parasol:
 registry:
   username:
   password:
-
-sso:
-  url:
-  client:
-  logoutUrl:
-
-store:
-  url:
-  service:
