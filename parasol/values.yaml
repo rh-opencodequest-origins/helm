@@ -17,7 +17,21 @@ parasol:
     argocd:
       name: parasol-store
       namespace:
+  web:
+    templates: []
+    argocd:
+      name: parasol-web
+      namespace:
 
 registry:
   username:
   password:
+
+sso:
+  url:
+  client:
+  logoutUrl:
+
+store:
+  url:
+  service:
