@@ -10,6 +10,7 @@ metadata:
   labels:
     {{- include "keycloak-realmimport.labels" $ | nindent 4 }}
     app: keycloak
+  namespace: {{ $.Values.keycloak.namespace }}
 spec:
   keycloakCRName: {{ $.Values.keycloak.name }}
   realm:
