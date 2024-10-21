@@ -82,7 +82,12 @@ data:
             parasol_store_build_repo_url: "https://{{ $.Values.gitlab.host }}/{{ $.Values.parasol.group }}/{{ $item.project }}.git"
             parasol_store_build_repo_revision: "{{ $item.branch }}"
             parasol_store_build_namespace: "{{ $item.namespace }}"
+            parasol_store_git_repo: "{{ $item.git.repo }}"
+            parasol_store_git_branch: "{{ $item.git.branch }}"
             parasol_store_build_image_registry_host: "{{ $item.image.host }}"
+            parasol_store_build_image_registry_organization: "{{ $item.image.organization }}"
+            parasol_store_build_image_name: "{{ $item.image.name }}"
+            parasol_store_build_image_tag: "{{ $item.image.tag }}"
             parasol_store_build_registry_username: "{{ $.Values.registry.username }}"
             parasol_store_build_registry_password: "{{ $.Values.registry.password }}"
 {{- end }}
