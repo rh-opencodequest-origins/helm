@@ -1,0 +1,18 @@
+gitlab:
+  rootPassword: openshift
+  host: 
+  email:
+    address: "gitlab@rhdemo.com"
+    displayName: "Gitlab"
+
+parasol:
+  group: parasol
+  store:
+    templates: []
+    argocd:
+      name: parasol-store-build
+      namespace:
+
+registry:
+  username:
+  password:

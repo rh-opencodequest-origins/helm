@@ -11,3 +11,6 @@ dependencies:
   - name: parasol
     version: 0.1.0
     repository: file://parasol
+  - name: parasol-build
+    version: 0.1.0
+    repository: file://parasol-build
