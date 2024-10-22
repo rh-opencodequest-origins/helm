@@ -12,7 +12,12 @@ parasol:
     argocd:
       name: parasol-store-build
       namespace:
+    image:
+      name: parasol-store
+   
 
 registry:
+  host:
+  organization:
   username:
   password:

@@ -84,10 +84,9 @@ data:
             parasol_store_build_namespace: "{{ $item.namespace }}"
             parasol_store_git_repo: "{{ $item.git.repo }}"
             parasol_store_git_branch: "{{ $item.git.branch }}"
-            parasol_store_build_image_registry_host: "{{ $item.image.host }}"
-            parasol_store_build_image_registry_organization: "{{ $item.image.organization }}"
-            parasol_store_build_image_name: "{{ $item.image.name }}"
-            parasol_store_build_image_tag: "{{ $item.image.tag }}"
+            parasol_store_build_registry_host: "{{ $.Values.registry.host }}"
+            parasol_store_build_registry_organization: "{{ $.Values.registry.organization }}"
+            parasol_store_build_image_name: "{{ $.Values.parasol.store.image.name }}"
             parasol_store_build_registry_username: "{{ $.Values.registry.username }}"
             parasol_store_build_registry_password: "{{ $.Values.registry.password }}"
 {{- end }}
