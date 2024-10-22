@@ -60,3 +60,19 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "parasol.store.source.image" -}}
+{{- printf "docker://%s:%s" .Values.parasol.store.image.source.image .Values.parasol.store.image.source.tag }}
+{{- end }}
+
+{{- define "parasol.store.image" -}}
+{{- printf "docker://%s/%s/%s:%s" .Values.registry.host .Values.registry.organization .Values.parasol.store.image.name .Values.parasol.store.image.tag }}
+{{- end }}
+
+{{- define "parasol.web.source.image" -}}
+{{- printf "docker://%s:%s" .Values.parasol.web.image.source.image .Values.parasol.web.image.source.tag }}
+{{- end }}
+
+{{- define "parasol.web.image" -}}
+{{- printf "docker://%s/%s/%s:%s" .Values.registry.host .Values.registry.organization .Values.parasol.web.image.name .Values.parasol.web.image.tag }}
+{{- end }}

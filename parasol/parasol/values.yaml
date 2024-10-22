@@ -17,12 +17,26 @@ parasol:
     argocd:
       name: parasol-store
       namespace:
+    image:
+      source:
+        image: quay.io/redhat_pe_workshop/parasol-store
+        tag: "4574702"
+      name: parasol-store
+      tag: "4574702"
   web:
     templates: []
     argocd:
       name: parasol-web
       namespace:
+    image:
+      source:
+        image: quay.io/redhat_pe_workshop/parasol-web
+        tag: 38fdc87
+      name: parasol-web
+      tag: 38fdc87
 
 registry:
+  host:
+  organization: parasol
   username:
   password:
