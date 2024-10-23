@@ -82,13 +82,15 @@ data:
             parasol_store_build_repo_url: "https://{{ $.Values.gitlab.host }}/{{ $.Values.parasol.group }}/{{ $item.project }}.git"
             parasol_store_build_repo_revision: "{{ $item.branch }}"
             parasol_store_build_namespace: "{{ $item.namespace }}"
-            parasol_store_git_repo: "{{ $item.git.repo }}"
-            parasol_store_git_branch: "{{ $item.git.branch }}"
+            parasol_store_git_host: "{{ $.Values.gitlab.host }}"
+            parasol_store_git_group: "{{ $.Values.parasol.store.gitlab.group }}"
+            parasol_store_git_repo: "{{ $.Values.parasol.store.gitlab.repo }}"
             parasol_store_build_registry_host: "{{ $.Values.registry.host }}"
             parasol_store_build_registry_organization: "{{ $.Values.registry.organization }}"
             parasol_store_build_image_name: "{{ $.Values.parasol.store.image.name }}"
             parasol_store_build_registry_username: "{{ $.Values.registry.username }}"
             parasol_store_build_registry_password: "{{ $.Values.registry.password }}"
+            parasol_store_build_cluster_subdomain: "{{ $.Values.cluster.subdomain }}"
 {{- end }}
 
         - name: Add new files to the repository

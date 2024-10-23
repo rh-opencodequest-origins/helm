@@ -14,10 +14,15 @@ parasol:
       namespace:
     image:
       name: parasol-store
-   
+    gitlab:
+      group: parasol
+      repo: parasol-store
 
 registry:
   host:
   organization: parasol
   username:
   password:
+
+cluster:
+  subdomain:
