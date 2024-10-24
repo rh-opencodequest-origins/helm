@@ -91,6 +91,15 @@ data:
             parasol_store_build_registry_username: "{{ $.Values.registry.username }}"
             parasol_store_build_registry_password: "{{ $.Values.registry.password }}"
             parasol_store_build_cluster_subdomain: "{{ $.Values.cluster.subdomain }}"
+            parasol_store_manifests_git_group: "{{ $.Values.parasol.store.manifests.gitlab.group }}"
+            parasol_store_manifests_git_repo: "{{ $.Values.parasol.store.manifests.gitlab.repo }}"
+            parasol_store_manifests_git_branch_dev: "{{ $.Values.parasol.store.manifests.gitlab.branch.dev }}"
+            parasol_store_manifests_git_branch_staging: "{{ $.Values.parasol.store.manifests.gitlab.branch.staging }}"
+            parasol_store_manifests_git_branch_prod: "{{ $.Values.parasol.store.manifests.gitlab.branch.prod }}"
+            parasol_store_manifest_file_dev: "{{ $.Values.parasol.store.manifests.files.dev }}"
+            parasol_store_manifest_file_staging: "{{ $.Values.parasol.store.manifests.files.staging }}"
+            parasol_store_manifest_file_prod: "{{ $.Values.parasol.store.manifests.files.prod }}"
+            parasol_store_git_user: "{{ $.Values.gitlab.user }}"
 {{- end }}
 
         - name: Add new files to the repository
