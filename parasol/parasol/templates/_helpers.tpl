@@ -76,3 +76,37 @@ Create the name of the service account to use
 {{- define "parasol.web.image" -}}
 {{- printf "docker://%s/%s/%s:%s" .Values.registry.host .Values.registry.organization .Values.parasol.web.image.name .Values.parasol.web.image.tag }}
 {{- end }}
+
+{{- define "sso.url" -}}
+{{- $ := index . 0 -}}
+{{- $arg := index . 1 }}
+{{- if eq $arg "dev" -}}
+{{- printf "https://%s/realms/%s" $.Values.parasol.web.sso.dev.host $.Values.parasol.web.sso.dev.realm }}
+{{- else if eq $arg "staging" -}}
+{{- printf "https://%s/realms/%s" $.Values.parasol.web.sso.staging.host $.Values.parasol.web.sso.staging.realm }}
+{{- else if eq $arg "prod" -}}
+{{- printf "https://%s/realms/%s" $.Values.parasol.web.sso.prod.host $.Values.parasol.web.sso.prod.realm }}
+{{- else -}}
+{{- "" }}
+{{- end }}
+{{- end }}
+
+{{- define "sso.client" -}}
+{{- $ := index . 0 -}}
+{{- $arg := index . 1 }}
+{{- if eq $arg "dev" -}}
+{{- $.Values.parasol.web.sso.dev.client }}
+{{- else if eq $arg "staging" -}}
+{{- $.Values.parasol.web.sso.staging.client }}
+{{- else if eq $arg "prod" -}}
+{{- $.Values.parasol.web.sso.prod.client }}
+{{- else -}}
+{{- "" }}
+{{- end }}
+{{- end }}
+
+{{- define "sso.logout-url" -}}
+{{- $ := index . 0 -}}
+{{- $arg := index . 1 -}}
+{{- printf "https://parasol-web-%s.%s/home" $arg.namespace $.Values.cluster.subdomain }}
+{{- end }}

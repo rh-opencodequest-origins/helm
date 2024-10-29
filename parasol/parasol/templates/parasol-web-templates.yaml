@@ -90,9 +90,9 @@ data:
             parasol_web_image_registry_password: "{{ $.Values.registry.password }}"
             parasol_web_store_app_url: "{{ $item.store.url }}"
             parasol_web_store_app_service: "{{ $item.store.service }}"
-            parasol_web_sso_url: "{{ $item.sso.url }}"
-            parasol_web_sso_client: "{{ $item.sso.client }}"
-            parasol_web_sso_logout_url: "{{ $item.sso.logoutUrl }}"
+            parasol_web_sso_url: "{{ include "sso.url" (list $ $item.environment) }}"
+            parasol_web_sso_client: "{{ include "sso.client" (list $ $item.environment) }}"
+            parasol_web_sso_logout_url: "{{ include "sso.logout-url" (list $ $item) }}"
 {{- end }}
 
         - name: Add new files to the repository
