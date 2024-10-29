@@ -1,6 +1,6 @@
 keycloak:
   name: keycloak
-  namespace: keycloak
+  namespace: 
 
 realm:
   name: parasol
