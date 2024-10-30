@@ -24,4 +24,4 @@ spec:
       volumes:
       - name: parasol-store-build-vol
         configMap:
-          name: parasol-store-build-templates
+          name: parasol-store-build-manifests

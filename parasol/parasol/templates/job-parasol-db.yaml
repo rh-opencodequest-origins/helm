@@ -24,4 +24,4 @@ spec:
       volumes:
       - name: parasol-db-vol
         configMap:
-          name: parasol-db-templates
+          name: parasol-db-manifests

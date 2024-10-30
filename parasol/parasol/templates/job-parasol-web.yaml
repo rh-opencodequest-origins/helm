@@ -24,4 +24,4 @@ spec:
       volumes:
       - name: parasol-web-vol
         configMap:
-          name: parasol-web-templates
+          name: parasol-web-manifests
