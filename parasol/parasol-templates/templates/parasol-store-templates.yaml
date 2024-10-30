@@ -1,6 +1,6 @@
 kind: ConfigMap
 metadata:
-  name:  parasol-db-templates
+  name:  parasol-store-templates
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 apiVersion: v1
@@ -12,7 +12,7 @@ data:
       tasks:
         - name: Check existence of group
           ansible.builtin.uri:
-            url: https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/api/v4/groups/{{ $.Values.parasol.group }}
+            url: https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/api/v4/groups/{{ $.Values.parasol.template.group }}
             method: GET
             validate_certs: false
           register: r_liveness
@@ -28,11 +28,11 @@ data:
           ansible.builtin.command: git config --global user.name "{{ $.Values.gitlab.email.displayName }}"
           ignore_errors: true
 
-{{- range $item := .Values.parasol.db.templates }}
+{{- range $item := .Values.parasol.template.templates }}
 
         - name: Build git repo url
           ansible.builtin.set_fact:
-            _git_template_repo_url: https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/{{ $.Values.parasol.group }}/{{ $item.project }}
+            _git_template_repo_url: https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/{{ $.Values.parasol.template.group }}/{{ $item.project }}
 
         - name: Remove older repo folders
           shell: rm -rf /tmp/{{ $item.project }}
@@ -77,11 +77,16 @@ data:
             dest: /tmp/{{ $item.project }}/{{ $item1 }}
             mode: "0660"         
           vars:
-            parasol_db_argocd_name: "{{ $.Values.parasol.db.argocd.name }}"
-            parasol_db_argocd_namespace: "{{ $.Values.parasol.db.argocd.namespace }}"
-            parasol_db_repo_url: "https://{{ $.Values.gitlab.host }}/parasol/{{ $item.project }}.git"
-            parasol_db_repo_revision: "{{ $item.branch }}"
-            parasol_db_namespace: "{{ $item.namespace }}"
+            parasol_db_namespace: "{{ $.Values.parasol.db.namespace }}"
+            parasol_db_service: "{{ $.Values.parasol.db.service }}"
+            parasol_db_name: "{{ $.Values.parasol.db.name }}"
+            parasol_db_user: "{{ $.Values.parasol.db.user }}"
+            parasol_db_password: "{{ $.Values.parasol.db.password }}"
+            gitlab_host: "{{ $.Values.gitlab.rootPassword }}"
+            parasol_store_group: "{{ $.Values.parasol.store.group }}"
+            parasol_store_manifests_repo: "{{ $.Values.parasol.store.manifests }}"
+            rhdh_gitops_namespace: "{{ $.Values.gitops.namespace }}"
+            rhdh_gitops_project: "{{ $.Values.gitops.project }}"
 {{- end }}
 
         - name: Add new files to the repository
@@ -105,13 +110,5 @@ data:
               /tmp/{{ $item.project }}
             cmd: >-
               git push {{ "{{" }} _git_template_repo_url {{ "}}" }}
-
-{{- range $item2 := $item.applications }}
-
-        - name: Deploy application {{ $item2 }}
-          kubernetes.core.k8s:
-            state: present
-            definition: "{{ "{{" }} lookup('file', '/tmp/{{ $item.project }}/{{ $item2 }}') | from_yaml {{ "}}" }}"
-{{- end }}
 
 {{- end }}
