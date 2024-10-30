@@ -82,7 +82,7 @@ data:
             parasol_db_name: "{{ $.Values.parasol.db.name }}"
             parasol_db_user: "{{ $.Values.parasol.db.user }}"
             parasol_db_password: "{{ $.Values.parasol.db.password }}"
-            gitlab_host: "{{ $.Values.gitlab.rootPassword }}"
+            gitlab_host: "{{ $.Values.gitlab.host }}"
             parasol_store_group: "{{ $.Values.parasol.store.group }}"
             parasol_store_manifests_repo: "{{ $.Values.parasol.store.manifests }}"
             rhdh_gitops_namespace: "{{ $.Values.gitops.namespace }}"
