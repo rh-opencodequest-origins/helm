@@ -85,8 +85,10 @@ data:
             gitlab_host: "{{ $.Values.gitlab.host }}"
             parasol_store_group: "{{ $.Values.parasol.store.group }}"
             parasol_store_manifests_repo: "{{ $.Values.parasol.store.manifests }}"
+            parasol_store_repo: "{{ $.Values.parasol.store.source }}"
             rhdh_gitops_namespace: "{{ $.Values.gitops.namespace }}"
             rhdh_gitops_project: "{{ $.Values.gitops.project }}"
+            cluster_subdomain: "{{ $.Values.cluster.subdomain }}"
 {{- end }}
 
         - name: Add new files to the repository

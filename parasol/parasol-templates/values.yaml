@@ -16,6 +16,7 @@ parasol:
   store:
     group: parasol
     manifests: parasol-store-manifests
+    source: parasol-store
   db:
     namespace: parasol-dev
     service: parasol-db
@@ -26,3 +27,6 @@ parasol:
 gitops:
   namespace:
   project: default
+
+cluster:
+  subdomain:
