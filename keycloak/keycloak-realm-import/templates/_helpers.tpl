@@ -97,3 +97,14 @@ Backstage client secret
 {{- randAlphaNum 32 }}
 {{- end }}
 {{- end }}
+
+{{/*
+User password
+*/}}
+{{- define "keycloak.user.password" -}}
+{{- if .Values.users.password }}
+{{- .Values.users.password }}
+{{- else }}
+{{- randAlpha 8 }}
+{{- end }}
+{{- end }}

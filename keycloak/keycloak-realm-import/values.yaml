@@ -24,8 +24,35 @@ hook:
   maxTimeToWait: 120000
 
 users:
-  
+  users:
+    - id: dev1      
+      groups:
+        - developers
+        - devteam1
+        - dev1
+    - id: dev2
+      groups:
+        - developers
+        - devteam1
+        - dev2
+    - id: pe1
+      groups:
+        - platformengineers
+        - pe1
+    - id: pe2
+      groups:
+        - platformengineers
+        - pe2
+  password:
+
 groups:
+  - name: developers
+  - name: devteam1
+  - name: platformengineers
+  - name: dev1
+  - name: dev2
+  - name: pe1
+  - name: pe2
 
 client:
   backstage:

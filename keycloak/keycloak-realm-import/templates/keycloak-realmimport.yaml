@@ -405,7 +405,7 @@ spec:
             - query-groups
         notBefore: 0
         groups: []
-{{- range $item := .Values.users }}
+{{- range $item := .Values.users.users }}
       - username: {{ $item.id }}
         enabled: true
         totp: false
@@ -415,7 +415,7 @@ spec:
         email: {{ $item.id }}@rhdemo.com
         credentials:
           - type: password
-            value: {{ $item.password }}
+            value: {{ include "keycloak.user.password" $ }}
         disableableCredentialTypes: []
         requiredActions: []
         realmRoles:
