@@ -1,1 +1,90 @@
 
+redhat-developer-hub:
+  global:
+    clusterRouterBase:
+    host:
+    dynamic:
+      includes:
+        - dynamic-plugins.default.yaml
+      plugins:
+        - package: ./dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic
+          disabled: false
+        - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
+          disabled: false
+        - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+          disabled: false
+        - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+          disabled: false
+        - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-topology
+          disabled: false
+        - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-tekton
+          disabled: false
+        - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd-backend-dynamic
+          disabled: false
+        - package: ./dynamic-plugins/dist/backstage-community-plugin-redhat-argocd
+          disabled: false
+        - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-keycloak-backend-dynamic
+          disabled: false
+        - package: ./dynamic-plugins/dist/backstage-plugin-techdocs-backend-dynamic
+          disabled: false
+        - package: ./dynamic-plugins/dist/backstage-plugin-techdocs
+          disabled: false
+  upstream:
+    postgresql:
+      auth:
+        username: postgres
+        database: backstage
+        existingSecret: backstage-postgresql
+        secretKeys:
+          userPasswordKey: postgres-password
+    backstage:
+      extraEnvVarsSecrets:
+        - gitlab-token
+        - argocd-password
+        - kubernetes-sa-token
+        - oauth-client
+      appConfig:
+        auth:
+          environment: production
+          providers:
+            oauth2Proxy: {}
+        signInPage: oauth2Proxy
+        integrations:
+          gitlab: []
+        catalog:
+          rules:
+            - allow: [Component, System, API, Resource, Location, Template]
+          locations: []
+          providers:
+            keycloakOrg:
+              default:
+                baseUrl:
+                realm: 
+                loginRealm: 
+                clientId: 
+                clientSecret: 
+        techdocs:
+          builder: 'local'
+          publisher:
+            type: 'local'
+          generator:
+            runIn: local
+        argocd:
+          appLocatorMethods: []
+        kubernetes:
+          clusterLocatorMethods: []
+          customResources:
+            - group: 'tekton.dev'
+              apiVersion: 'v1beta1'
+              plural: 'pipelineruns'
+            - group: 'tekton.dev'
+              apiVersion: 'v1beta1'
+              plural: 'taskruns'
+      extraEnvVars: []
+      extraContainers: []
+    service:
+      ports:
+        backend: 4180
+        targetPort:
+  route:
+    host:
