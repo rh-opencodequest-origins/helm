@@ -1,4 +1,4 @@
-nameOverride: "backstage-postgresql"
+nameOverride: "backstage"
 
 namespace: default
 
