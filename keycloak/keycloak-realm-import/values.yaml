@@ -38,10 +38,12 @@ users:
     - id: pe1
       groups:
         - platformengineers
+        - rhdh
         - pe1
     - id: pe2
       groups:
         - platformengineers
+        - rhdh
         - pe2
   password:
 
@@ -49,6 +51,7 @@ groups:
   - name: developers
   - name: devteam1
   - name: platformengineers
+  - name: rhdh
   - name: dev1
   - name: dev2
   - name: pe1
