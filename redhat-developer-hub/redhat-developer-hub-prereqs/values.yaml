@@ -1,9 +1,20 @@
 nameOverride: "backstage-postgresql"
 
+namespace: default
+
 backstage:
+  argocd:
+    password:
+  gitlab:
+    token:
+  kubernetes:
+    sa_token:
+  oauth:
+    clientId:
+    clientSecret:
   postgresql:
     password: password
 
 argocd:
   enabled: true
-  syncwave: "-2"
+  syncwave: "-1"

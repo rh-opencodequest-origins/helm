@@ -1,0 +1,16 @@
+nameOverride: ""
+
+gitops:
+  namespace:
+
+helm:
+  repo: https://charts.openshift.io
+  chart: redhat-developer-hub
+  version: 1.3.0
+  values:
+    git:
+      host: 
+      group: rhdh
+      repo: developer-hub-config
+      revision: main
+      path: values.yaml
