@@ -3,6 +3,6 @@ nameOverride: ""
 subscription:
   channel: ""
   installPlanApproval: Automatic
-  name: openshift-pipelines-operator-rh
+  name: rhtas-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
