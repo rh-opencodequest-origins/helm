@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "redhat-developer-hub-prereqs.name" -}}
+{{- define "tssc.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "redhat-developer-hub-prereqs.fullname" -}}
+{{- define "tssc.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "redhat-developer-hub-prereqs.chart" -}}
+{{- define "tssc.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "redhat-developer-hub-prereqs.labels" -}}
-helm.sh/chart: {{ include "redhat-developer-hub-prereqs.chart" . }}
-{{ include "redhat-developer-hub-prereqs.selectorLabels" . }}
+{{- define "tssc.labels" -}}
+helm.sh/chart: {{ include "tssc.chart" . }}
+{{ include "tssc.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,33 +45,18 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "redhat-developer-hub-prereqs.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "redhat-developer-hub-prereqs.name" . }}
+{{- define "tssc.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "tssc.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "redhat-developer-hub-prereqs.serviceAccountName" -}}
+{{- define "tssc.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "redhat-developer-hub-prereqs.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "tssc.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
-ArgoCD Syncwave
-*/}}
-{{- define "redhat-developer-hub-prereqs.argocd-syncwave" -}}
-{{- if .Values.argocd }}
-{{- if and (.Values.argocd.syncwave) (.Values.argocd.enabled) -}}
-argocd.argoproj.io/sync-wave: "{{ .Values.argocd.syncwave }}"
-{{- else }}
-{{- "{}" }}
-{{- end }}
-{{- else }}
-{{- "{}" }}
 {{- end }}
 {{- end }}
