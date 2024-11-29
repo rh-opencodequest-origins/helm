@@ -1,0 +1,10 @@
+nameOverride: ""
+
+namespace: openshift-operators
+
+subscription:
+  channel: "stable"
+  installPlanApproval: Automatic
+  name: rhtas-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
