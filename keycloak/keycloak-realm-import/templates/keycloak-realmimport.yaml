@@ -644,8 +644,7 @@ spec:
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: "client-secret"
-        redirectUris: 
-          - {{ .Values.client.trusted-artifact-signer.redirectUri }}
+        redirectUris: {{ .Values.client.trusted-artifact-signer.redirectUri }}
         webOrigins: []
         notBefore: 0
         bearerOnly: false
