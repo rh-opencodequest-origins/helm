@@ -636,6 +636,47 @@ spec:
           - offline_access
           - microprofile-jwt
       - id: {{ uuidv4 }}
+        clientId: {{ .Values.client.trusted-artifact-signer.name }}
+        rootUrl: ""
+        adminUrl: ""
+        baseUrl: ""
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: "client-secret"
+        redirectUris: 
+          - {{ .Values.client.trusted-artifact-signer.redirectUri }}
+        webOrigins: []
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: true
+        serviceAccountsEnabled: false
+        publicClient: true
+        frontchannelLogout: true
+        protocol: "openid-connect"
+        attributes: 
+          oidc.ciba.grant.enabled": "false"
+          oauth2.device.authorization.grant.enabled": "false"
+          backchannel.logout.session.required": "true"
+          backchannel.logout.revoke.offline.tokens": "false"
+        authenticationFlowBindingOverrides: {}
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: -1      
+        defaultClientScopes:
+          - profile
+          - roles
+          - email
+          - web-origins
+          - acr
+        optionalClientScopes:
+          - address
+          - phone
+          - offline_access
+          - microprofile-jwt
+      - id: {{ uuidv4 }}
         clientId: {{ .Values.client.backstagePlugin.name }}
         surrogateAuthRequired: false
         enabled: true

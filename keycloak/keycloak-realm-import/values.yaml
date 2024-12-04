@@ -45,6 +45,9 @@ users:
         - platformengineers
         - rhdh
         - pe2
+    - id: pipeline
+      groups:
+        - infrastructure
   password:
 
 groups:
@@ -56,6 +59,7 @@ groups:
   - name: dev2
   - name: pe1
   - name: pe2
+  - name: infrastructure
 
 client:
   backstage:
@@ -68,6 +72,12 @@ client:
     redirectUri:
     webOrigin:
     secret:
+  trusted-artifact-signer:
+    name: trusted-artifact-signer
+    redirectUri: [
+        "urn:ietf:wg:oauth:2.0:oob",
+        "*"
+      ]
 
 argocd:
   enabled: true
