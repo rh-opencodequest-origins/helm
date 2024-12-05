@@ -644,7 +644,8 @@ spec:
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: "client-secret"
-        redirectUris: "*"
+        redirectUris: 
+          - "*"
         webOrigins: []
         notBefore: 0
         bearerOnly: false

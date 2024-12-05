@@ -74,7 +74,9 @@ client:
     secret:
   trustedartifactsigner:
     name: trusted-artifact-signer
-    
+    redirectUri:
+      - urn:ietf:wg:oauth:2.0:oob
+      - "*"
 
 argocd:
   enabled: true
