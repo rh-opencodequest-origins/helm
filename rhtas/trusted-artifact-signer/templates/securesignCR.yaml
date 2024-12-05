@@ -1,0 +1,97 @@
+---
+apiVersion: rhtas.redhat.com/v1alpha1
+kind: Securesign
+metadata:
+  name: securesign-pew
+  labels:
+    app.kubernetes.io/instance: securesign-pew
+    app.kubernetes.io/name: securesign-pew
+    app.kubernetes.io/part-of: trusted-artifact-signer
+  annotations:
+    rhtas.redhat.com/metrics: 'true'
+  namespace: trusted-artifact-signer
+spec:
+  fulcio:
+    certificate:
+      commonName: fulcio.hostname
+      organizationEmail: admin@rhdemo.com
+      organizationName: Parasol
+    config:
+      OIDCIssuers:
+        - ClientID: trusted-artifact-signer
+          Issuer: 'https://sso.apps.cluster-zw7qm.zw7qm.sandbox1561.opentlc.com/realms/backstage'
+          IssuerURL: 'https://sso.apps.cluster-zw7qm.zw7qm.sandbox1561.opentlc.com/realms/backstage'
+          Type: email
+    ctlog:
+      port: 80
+      prefix: trusted-artifact-signer
+    externalAccess:
+      enabled: true
+    monitoring:
+      enabled: true
+  rekor:
+    monitoring:
+      enabled: true
+    signer:
+      kms: secret
+    trillian:
+      port: 8091
+    externalAccess:
+      enabled: true
+    backFillRedis:
+      enabled: true
+      schedule: 0 0 * * *
+    rekorSearchUI:
+      enabled: true
+    pvc:
+      accessModes:
+        - ReadWriteOnce
+      retain: true
+      size: 5Gi
+  trillian:
+    database:
+      create: true
+      pvc:
+        accessModes:
+          - ReadWriteOnce
+        retain: true
+        size: 5Gi
+    monitoring:
+      enabled: true
+  tsa:
+    externalAccess:
+      enabled: true
+    monitoring:
+      enabled: true
+    ntpMonitoring:
+      enabled: true
+    signer:
+      certificateChain:
+        intermediateCA:
+          - commonName: tsa.hostname
+            organizationEmail: admin@rhdemo.com
+            organizationName: Parasol
+        leafCA:
+          commonName: tsa.hostname
+          organizationEmail: admin@rhdemo.com
+          organizationName: Parasol
+        rootCA:
+          commonName: tsa.hostname
+          organizationEmail: admin@rhdemo.com
+          organizationName: Parasol
+  tuf:
+    externalAccess:
+      enabled: true
+    keys:
+      - name: rekor.pub
+      - name: ctfe.pub
+      - name: fulcio_v1.crt.pem
+      - name: tsa.certchain.pem
+    port: 80
+    pvc:
+      accessModes:
+        - ReadWriteOnce
+      retain: true
+      size: 100Mi
+    rootKeySecretRef:
+      name: tuf-root-keys
