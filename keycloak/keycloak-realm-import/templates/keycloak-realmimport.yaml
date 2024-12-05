@@ -645,9 +645,8 @@ spec:
         alwaysDisplayInConsole: false
         clientAuthenticatorType: "client-secret"
         redirectUris: 
-        {{- range $redir := .Values.client.trustedartifactsigner.redirectUri }}
-          - {{ $redir }}
-        {{- end }}
+          - urn:ietf:wg:oauth:2.0:oob
+          - "*"
         webOrigins: []
         notBefore: 0
         bearerOnly: false
