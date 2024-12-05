@@ -644,7 +644,10 @@ spec:
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: "client-secret"
-        redirectUris: {{ .Values.client.trustedartifactsigner.redirectUri }}
+        redirectUris: 
+        {{- range $redir := .Values.client.trustedartifactsigner.redirectUri }}
+          - {{ $redir }}
+        {{- end }}
         webOrigins: []
         notBefore: 0
         bearerOnly: false
