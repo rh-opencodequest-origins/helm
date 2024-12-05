@@ -72,7 +72,7 @@ client:
     redirectUri:
     webOrigin:
     secret:
-  trusted-artifact-signer:
+  trustedartifactsigner:
     name: trusted-artifact-signer
     
 

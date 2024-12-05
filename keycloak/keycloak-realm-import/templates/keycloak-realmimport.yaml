@@ -636,7 +636,7 @@ spec:
           - offline_access
           - microprofile-jwt
       - id: {{ uuidv4 }}
-        clientId: {{ .Values.client.trusted-artifact-signer.name }}
+        clientId: {{ .Values.client.trustedartifactsigner.name }}
         rootUrl: ""
         adminUrl: ""
         baseUrl: ""
