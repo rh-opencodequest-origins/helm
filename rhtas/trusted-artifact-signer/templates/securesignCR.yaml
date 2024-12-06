@@ -2,11 +2,11 @@
 apiVersion: rhtas.redhat.com/v1alpha1
 kind: Securesign
 metadata:
-  name: securesign-pew
+  name: {{ .Values.instance }}
   labels:
-    app.kubernetes.io/instance: securesign-pew
-    app.kubernetes.io/name: securesign-pew
-    app.kubernetes.io/part-of: trusted-artifact-signer
+    app.kubernetes.io/instance: {{ .Values.instance }}
+    app.kubernetes.io/name: {{ .Values.instance }}
+    app.kubernetes.io/part-of: {{ .Values.namespace }}
   annotations:
     rhtas.redhat.com/metrics: 'true'
   namespace: trusted-artifact-signer
@@ -14,13 +14,13 @@ spec:
   fulcio:
     certificate:
       commonName: fulcio.hostname
-      organizationEmail: admin@rhdemo.com
-      organizationName: Parasol
+      organizationEmail: {{ .Values.email }}
+      organizationName: {{ .Values.org }}
     config:
       OIDCIssuers:
         - ClientID: trusted-artifact-signer
-          Issuer: 'https://sso.apps.cluster-zw7qm.zw7qm.sandbox1561.opentlc.com/realms/backstage'
-          IssuerURL: 'https://sso.apps.cluster-zw7qm.zw7qm.sandbox1561.opentlc.com/realms/backstage'
+          Issuer: 'https://{{ .Values.oidc }}'
+          IssuerURL: 'https://{{ .Values.oidc }}'
           Type: email
     ctlog:
       port: 80
@@ -69,16 +69,16 @@ spec:
       certificateChain:
         intermediateCA:
           - commonName: tsa.hostname
-            organizationEmail: admin@rhdemo.com
-            organizationName: Parasol
+            organizationEmail: {{ .Values.email }}
+            organizationName: {{ .Values.org }}
         leafCA:
           commonName: tsa.hostname
-          organizationEmail: admin@rhdemo.com
-          organizationName: Parasol
+          organizationEmail: {{ .Values.email }}
+          organizationName: {{ .Values.org }}
         rootCA:
           commonName: tsa.hostname
-          organizationEmail: admin@rhdemo.com
-          organizationName: Parasol
+          organizationEmail: {{ .Values.email }}
+          organizationName: {{ .Values.org }}
   tuf:
     externalAccess:
       enabled: true
