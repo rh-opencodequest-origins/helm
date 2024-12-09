@@ -15,6 +15,38 @@ backstage:
   postgresql:
     password: password
 
+rbacPolicy:
+  - "p, role:default/location_read, catalog.entity.read, read, allow"
+  - "p, role:default/location_read, catalog.location.read, read, allow"
+
+  - "p, role:default/platformengineer, catalog.entity.create, create, allow"
+  - "p, role:default/platformengineer, catalog.entity.refresh, update, allow"
+  - "p, role:default/platformengineer, catalog.entity.delete, delete, allow"
+  - "p, role:default/platformengineer, catalog.location.create, create, allow"
+  - "p, role:default/platformengineer, catalog.location.delete, delete, allow"
+  
+  - "p, role:default/scaffolder_execute, scaffolder.action.execute, use, allow"
+  - "p, role:default/scaffolder_execute, scaffolder.template.parameter.read, read, allow"
+  - "p, role:default/scaffolder_execute, scaffolder.template.step.read, read, allow"
+  - "p, role:default/scaffolder_execute, scaffolder.task.create, create, allow"
+  - "p, role:default/scaffolder_execute, scaffolder.task.cancel, use, allow"
+  - "p, role:default/scaffolder_execute, scaffolder.task.read, read, allow"
+  - "p, role:default/scaffolder_execute, catalog.location.create, create, allow"
+
+  - "p, role:default/plugins, topology.view.read, read, allow"
+  - "p, role:default/plugins, tekton.view.read, read, allow"
+  - "p, role:default/plugins, argocd.view.read, read, allow"
+  - "p, role:default/plugins, kubernetes.proxy, use, allow"
+
+  - "g, group:default/platformengineers, role:default/location_read"
+  - "g, group:default/platformengineers, role:default/platformengineer"
+  - "g, group:default/platformengineers, role:default/scaffolder_execute"
+  - "g, group:default/platformengineers, role:default/plugins"
+
+  - "g, group:default/developers, role:default/location_read"
+  - "g, group:default/developers, role:default/scaffolder_execute"
+  - "g, group:default/developers, role:default/plugins"
+
 argocd:
   enabled: true
   syncwave: "-1"
