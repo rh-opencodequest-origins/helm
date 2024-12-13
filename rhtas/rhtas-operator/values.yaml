@@ -1,10 +1,18 @@
 nameOverride: ""
 
+namespace: ""
+
+name: rhtas-operator
 namespace: openshift-operators
 
 subscription:
-  channel: "stable"
+  channel: stable
   installPlanApproval: Automatic
   name: rhtas-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+
+argocd:
+  enabled: true
+  operator:
+    syncwave: "1"

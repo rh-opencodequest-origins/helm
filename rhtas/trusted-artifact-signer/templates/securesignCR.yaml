@@ -3,12 +3,10 @@ apiVersion: rhtas.redhat.com/v1alpha1
 kind: Securesign
 metadata:
   name: {{ .Values.instance }}
-  labels:
-    app.kubernetes.io/instance: {{ .Values.instance }}
-    app.kubernetes.io/name: {{ .Values.instance }}
-    app.kubernetes.io/part-of: {{ .Values.namespace }}
   annotations:
     rhtas.redhat.com/metrics: 'true'
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    {{- include "trusted-artifact-signer.argocd-syncwave" . | nindent 4 }}    
   namespace: trusted-artifact-signer
 spec:
   fulcio:

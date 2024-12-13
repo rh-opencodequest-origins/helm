@@ -71,3 +71,18 @@ Determine target namespace
 {{- printf "%s" .Release.Namespace }}
 {{- end }}
 {{- end }}
+
+{{/*
+ArgoCD Syncwave
+*/}}
+{{- define "rhtas-operator.argocd-syncwave" -}}
+{{- if .Values.argocd }}
+{{- if and (.Values.argocd.operator.syncwave) (.Values.argocd.enabled) -}}
+argocd.argoproj.io/sync-wave: "{{ .Values.argocd.operator.syncwave }}"
+{{- else }}
+{{- "{}" }}
+{{- end }}
+{{- else }}
+{{- "{}" }}
+{{- end }}
+{{- end }}
