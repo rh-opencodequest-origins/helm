@@ -1,0 +1,26 @@
+sonataFlow:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 250m
+      memory: 64Mi
+
+postgres:
+  authSecret:
+    name: sonataflow-psql-postgresql
+    passwordKey: database-password
+    userKey: database-user
+  database: sonataflow
+  service: sonataflow-psql-postgresql
+
+backstage:
+  namespace: backstage
+  operator:
+    enabled: false
+
+argocd:
+  enabled: true
+  orchestrator:
+    syncwave: "0"

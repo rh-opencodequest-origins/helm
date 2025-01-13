@@ -1,0 +1,26 @@
+apiVersion: rhdh.redhat.com/v1alpha1
+kind: Orchestrator
+metadata:
+  name: {{ include "orchestrator.name" . }}
+  namespace: {{ include "orchestrator.namespace" . }}
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    {{- include "orchestrator.argocd-syncwave" . | nindent 4 }}
+spec:
+  orchestrator:
+    namespace: {{ include "orchestrator.namespace" . }}
+    sonataflowPlatform:
+      resources:
+        {{- toYaml .Values.sonataFlow.resources | nindent 8 }}
+  postgres:
+    authSecret:
+      name: {{ .Values.postgres.authSecret.name }}
+      passwordKey: {{ .Values.postgres.authSecret.passwordKey }}
+      userKey: {{ .Values.postgres.authSecret.userKey }}
+    database: {{ .Values.postgres.database }}
+    serviceName: {{ .Values.postgres.service }}
+    serviceNamespace: {{ include "orchestrator.namespace" . }}
+  rhdhOperator:
+    enabled: {{ .Values.backstage.operator.enabled }}
+  networkPolicy:
+    rhdhNamespace: {{ .Values.backstage.namespace }}
