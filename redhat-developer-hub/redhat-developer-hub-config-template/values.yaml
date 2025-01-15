@@ -38,6 +38,9 @@ oauth2:
 cluster:
   subdomain:
 
+orchestrator:
+  sonataFlowDataIndexService:
+
 argocd:
   enabled: true
   syncwave: "-2"
