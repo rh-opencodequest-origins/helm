@@ -38,6 +38,12 @@ rbacPolicy:
   - "p, role:default/plugins, argocd.view.read, read, allow"
   - "p, role:default/plugins, kubernetes.proxy, use, allow"
 
+  - "p, role:default/workflowUser, orchestrator.workflow, read, allow"
+  - "p, role:default/workflowUser, orchestrator.workflow.use, use, allow"
+
+  - "p, role:default/workflowAdmin, orchestrator.workflow, read, allow"
+  - "p, role:default/workflowAdmin, orchestrator.workflow.use, use, allow"
+
   - "g, group:default/platformengineers, role:default/location_read"
   - "g, group:default/platformengineers, role:default/platformengineer"
   - "g, group:default/platformengineers, role:default/scaffolder_execute"
@@ -46,6 +52,9 @@ rbacPolicy:
   - "g, group:default/developers, role:default/location_read"
   - "g, group:default/developers, role:default/scaffolder_execute"
   - "g, group:default/developers, role:default/plugins"
+
+  - "g, group:default/developers, role:default/workflowUser"
+  - "g, group:default/platformengineers, role:default/workflowAdmin"
 
 argocd:
   enabled: true
