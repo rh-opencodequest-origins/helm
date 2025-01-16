@@ -41,14 +41,14 @@ rbacPolicy:
   - "p, role:default/workflowUser, orchestrator.workflowInstances.read, read, allow"
   - "p, role:default/workflowUser, orchestrator.workflowInstance.read, read, allow"
   - "p, role:default/workflowUser, orchestrator.workflow.read, read, allow"
-  - "p, role:default/workflowUser, orchestrator.workflow.execute, execute, allow"
-  - "p, role:default/workflowUser, orchestrator.workflowInstance.abort, abort, allow"
+  - "p, role:default/workflowUser, orchestrator.workflow.execute, use, allow"
+  - "p, role:default/workflowUser, orchestrator.workflowInstance.abort, delete, allow"
 
   - "p, role:default/workflowAdmin, orchestrator.workflowInstances.read, read, allow"
   - "p, role:default/workflowAdmin, orchestrator.workflowInstance.read, read, allow"
   - "p, role:default/workflowAdmin, orchestrator.workflow.read, read, allow"
-  - "p, role:default/workflowAdmin, orchestrator.workflow.execute, execute, allow"
-  - "p, role:default/workflowAdmin, orchestrator.workflowInstance.abort, abort, allow"
+  - "p, role:default/workflowAdmin, orchestrator.workflow.execute, use, allow"
+  - "p, role:default/workflowAdmin, orchestrator.workflowInstance.abort, delete, allow"
 
   - "g, group:default/platformengineers, role:default/location_read"
   - "g, group:default/platformengineers, role:default/platformengineer"
