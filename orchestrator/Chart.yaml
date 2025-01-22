@@ -14,3 +14,7 @@ dependencies:
   - name: orchestrator
     version: 0.1.0
     repository: file://orchestrator
+  - name: ticket-manager
+    version: 0.1.0
+    repository: file://ticket-manager
+  
