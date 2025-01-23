@@ -7,7 +7,7 @@ image:
   repository: quay.io/btison/pew-ticket-manager
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: a1352d4
+  tag: a646f39
 
 podAnnotations: {}
 
