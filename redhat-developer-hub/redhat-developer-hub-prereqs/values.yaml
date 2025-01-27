@@ -14,6 +14,8 @@ backstage:
     clientSecret:
   postgresql:
     password: password
+  orchestrator:
+    token: 
 
 rbacPolicy:
   - "p, role:default/location_read, catalog.entity.read, read, allow"
