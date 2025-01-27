@@ -20,7 +20,12 @@ backstage:
   operator:
     enabled: false
 
+openshift:
+  token:
+  api:
+
 argocd:
   enabled: true
   orchestrator:
     syncwave: "0"
+
