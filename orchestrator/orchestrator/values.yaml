@@ -24,6 +24,10 @@ openshift:
   token:
   api:
 
+notification:
+  token:
+  url:
+
 argocd:
   enabled: true
   orchestrator:
