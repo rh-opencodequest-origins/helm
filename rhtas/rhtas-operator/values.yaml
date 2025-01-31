@@ -1,7 +1,5 @@
 nameOverride: ""
 
-namespace: ""
-
 name: rhtas-operator
 namespace: openshift-operators
 
