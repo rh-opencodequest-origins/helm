@@ -19,14 +19,13 @@ backstage:
   namespace: backstage
   operator:
     enabled: false
+  backend:
+    token:
+    url:
 
 openshift:
   token:
   api:
-
-notification:
-  token:
-  url:
 
 argocd:
   enabled: true
