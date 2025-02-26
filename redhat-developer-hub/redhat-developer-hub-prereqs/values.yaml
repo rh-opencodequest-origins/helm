@@ -21,6 +21,9 @@ rbacPolicy:
   - "p, role:default/location_read, catalog.entity.read, read, allow"
   - "p, role:default/location_read, catalog.location.read, read, allow"
 
+  - "p, role:default/location_read_developer, catalog.entity.read, read, allow"
+  - "p, role:default/location_read_developer, catalog.location.read, read, allow"
+
   - "p, role:default/platformengineer, catalog.entity.create, create, allow"
   - "p, role:default/platformengineer, catalog.entity.refresh, update, allow"
   - "p, role:default/platformengineer, catalog.entity.delete, delete, allow"
@@ -57,12 +60,27 @@ rbacPolicy:
   - "g, group:default/platformengineers, role:default/scaffolder_execute"
   - "g, group:default/platformengineers, role:default/plugins"
 
-  - "g, group:default/developers, role:default/location_read"
+  - "g, group:default/developers, role:default/location_read_developer"
   - "g, group:default/developers, role:default/scaffolder_execute"
   - "g, group:default/developers, role:default/plugins"
 
   - "g, group:default/developers, role:default/workflowUser"
   - "g, group:default/platformengineers, role:default/workflowAdmin"
+
+rbacConditionalPolicies:
+  - result: CONDITIONAL
+    roleEntityRef: 'role:default/location_read_developer'
+    resourceType: catalog-entity
+    pluginId: catalog
+    permissionMapping:
+      - read
+    conditions:
+      not:
+        rule: HAS_ANNOTATION
+        resourceType: catalog-entity
+        params:
+          annotation: backstage.io/managed-by
+          value: orchestrator
 
 argocd:
   enabled: true
