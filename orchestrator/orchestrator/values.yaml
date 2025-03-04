@@ -25,7 +25,11 @@ backstage:
 
 openshift:
   token:
-  api:
+  url:
+
+gitlab:
+  token:
+  url:
 
 argocd:
   enabled: true
