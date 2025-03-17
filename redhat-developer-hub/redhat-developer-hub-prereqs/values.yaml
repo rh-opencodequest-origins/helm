@@ -49,11 +49,9 @@ rbacPolicy:
   - "p, role:default/workflowUser, orchestrator.workflow.execute, use, allow"
   - "p, role:default/workflowUser, orchestrator.workflowInstance.abort, delete, allow"
 
-  - "p, role:default/workflowAdmin, orchestrator.workflowInstances.read, read, allow"
-  - "p, role:default/workflowAdmin, orchestrator.workflowInstance.read, read, allow"
-  - "p, role:default/workflowAdmin, orchestrator.workflow.read, read, allow"
-  - "p, role:default/workflowAdmin, orchestrator.workflow.execute, use, allow"
-  - "p, role:default/workflowAdmin, orchestrator.workflowInstance.abort, delete, allow"
+  - "p, role:default/workflowAdmin, orchestrator.workflow, read, allow"
+  - "p, role:default/workflowAdmin, orchestrator.workflow.use, update, allow"
+  - "p, role:default/workflowAdmin, orchestrator.workflowAdminView, read, allow"
 
   - "g, group:default/platformengineers, role:default/location_read"
   - "g, group:default/platformengineers, role:default/platformengineer"
