@@ -77,6 +77,20 @@ rbacConditionalPolicies:
           annotation: backstage.io/managed-by
           value: orchestrator
 
+  - conditions:
+      params:
+        claims: 
+          - $ownerRefs
+      resourceType: catalog-entity
+      rule: IS_ENTITY_OWNER
+    permissionMapping:
+      - delete
+      - update
+    pluginId: catalog
+    resourceType: catalog-entity
+    result: CONDITIONAL
+    roleEntityRef: role:default/developer
+
 argocd:
   enabled: true
   syncwave: "-1"
