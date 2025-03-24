@@ -56,6 +56,7 @@ rbacPolicy:
   - "g, group:default/platformengineers, role:default/plugins"
 
   - "g, group:default/developers, role:default/location_read_developer"
+  - "g, group:default/developers, role:default/developer"
   - "g, group:default/developers, role:default/scaffolder_execute"
   - "g, group:default/developers, role:default/plugins"
 
