@@ -29,22 +29,18 @@ users:
       groups:
         - developers
         - devteam1
-        - dev1
     - id: dev2
       groups:
         - developers
         - devteam1
-        - dev2
     - id: pe1
       groups:
         - platformengineers
         - rhdh
-        - pe1
     - id: pe2
       groups:
         - platformengineers
         - rhdh
-        - pe2
     - id: pipeline
       groups:
         - infrastructure
@@ -55,10 +51,6 @@ groups:
   - name: devteam1
   - name: platformengineers
   - name: rhdh
-  - name: dev1
-  - name: dev2
-  - name: pe1
-  - name: pe2
   - name: infrastructure
 
 client:
