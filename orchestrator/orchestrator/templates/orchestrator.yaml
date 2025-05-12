@@ -7,20 +7,24 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     {{- include "orchestrator.argocd-syncwave" . | nindent 4 }}
 spec:
-  orchestrator:
-    namespace: {{ include "orchestrator.namespace" . }}
-    sonataflowPlatform:
-      resources:
-        {{- toYaml .Values.sonataFlow.resources | nindent 8 }}
+  platform:
+    namespace: orchestrator
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
   postgres:
     authSecret:
-      name: {{ .Values.postgres.authSecret.name }}
-      passwordKey: {{ .Values.postgres.authSecret.passwordKey }}
-      userKey: {{ .Values.postgres.authSecret.userKey }}
-    database: {{ .Values.postgres.database }}
-    serviceName: {{ .Values.postgres.service }}
-    serviceNamespace: {{ include "orchestrator.namespace" . }}
-  rhdhOperator:
-    enabled: {{ .Values.backstage.operator.enabled }}
-  networkPolicy:
-    rhdhNamespace: {{ .Values.backstage.namespace }}
+      name: sonataflow-psql-postgresql
+      passwordKey: database-password
+      userKey: database-user
+    database: sonataflow
+    name: sonataflow-psql-postgresql
+    namespace: orchestrator
+  rhdh:
+    installOperator: false
+    name: ''
+    namespace: ''
