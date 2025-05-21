@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: dynamic-plugins-root
+  labels:
+    {{- include "redhat-developer-hub-prereqs.labels" . | nindent 4 }}
+  annotations:
+    {{- include "redhat-developer-hub-prereqs.argocd-syncwave" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
