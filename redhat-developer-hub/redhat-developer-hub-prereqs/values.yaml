@@ -15,7 +15,7 @@ backstage:
   postgresql:
     password: password
   orchestrator:
-    token: 
+    token:
 
 rbacPolicy:
   - "p, role:default/location_read, catalog.entity.read, read, allow"
@@ -29,7 +29,7 @@ rbacPolicy:
   - "p, role:default/platformengineer, catalog.entity.delete, delete, allow"
   - "p, role:default/platformengineer, catalog.location.create, create, allow"
   - "p, role:default/platformengineer, catalog.location.delete, delete, allow"
-  
+
   - "p, role:default/scaffolder_execute, scaffolder.action.execute, use, allow"
   - "p, role:default/scaffolder_execute, scaffolder.template.parameter.read, read, allow"
   - "p, role:default/scaffolder_execute, scaffolder.template.step.read, read, allow"
@@ -42,6 +42,7 @@ rbacPolicy:
   - "p, role:default/plugins, tekton.view.read, read, allow"
   - "p, role:default/plugins, argocd.view.read, read, allow"
   - "p, role:default/plugins, kubernetes.proxy, use, allow"
+  - "p, role:default/plugins, adoption-insights.events.read, read, allow"
 
   - "p, role:default/workflowUser, orchestrator.workflow.create-ocp-namespace-swt, read, allow"
   - "p, role:default/workflowUser, orchestrator.workflow.use.create-ocp-namespace-swt, update, allow"
@@ -80,7 +81,7 @@ rbacConditionalPolicies:
 
   - conditions:
       params:
-        claims: 
+        claims:
           - $ownerRefs
       resourceType: catalog-entity
       rule: IS_ENTITY_OWNER
