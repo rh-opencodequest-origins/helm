@@ -24,6 +24,7 @@ rbacPolicy:
   - "p, role:default/platformengineer, catalog.entity.delete, delete, allow"
   - "p, role:default/platformengineer, catalog.location.create, create, allow"
   - "p, role:default/platformengineer, catalog.location.delete, delete, allow"
+  - "p, role:default/platformengineer, adoption-insights.events.read, read, allow"
   
   - "p, role:default/scaffolder_execute, scaffolder.action.execute, use, allow"
   - "p, role:default/scaffolder_execute, scaffolder.template.parameter.read, read, allow"
