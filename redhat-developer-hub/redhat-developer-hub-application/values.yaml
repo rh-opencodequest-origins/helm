@@ -6,7 +6,7 @@ gitops:
 helm:
   repo: https://charts.openshift.io
   chart: redhat-developer-hub
-  version: 1.5.1
+  version: 1.6.3
   values:
     git:
       host: 
