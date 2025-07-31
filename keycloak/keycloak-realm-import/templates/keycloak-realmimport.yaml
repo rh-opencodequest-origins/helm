@@ -665,7 +665,17 @@ spec:
           backchannel.logout.revoke.offline.tokens": "false"
         authenticationFlowBindingOverrides: {}
         fullScopeAllowed: true
-        nodeReRegistrationTimeout: -1      
+        nodeReRegistrationTimeout: -1   
+          protocolMappers:
+            - id: {{ uuidv4 }}
+              name: "trusted-artifact-signer-audience"
+              protocol: "openid-connect"
+              protocolMapper: "oidc-audience-mapper"
+              consentRequired: false
+              config:
+                included.client.audience: "trusted-artifact-signer"
+                id.token.claim: "false"
+                access.token.claim: "true"   
         defaultClientScopes:
           - profile
           - roles
