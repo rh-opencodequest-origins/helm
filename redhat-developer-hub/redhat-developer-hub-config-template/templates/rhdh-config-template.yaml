@@ -117,6 +117,6 @@ data:
             chdir: >-
               /tmp/{{ $item.project }}
             cmd: >-
-              git push {{ "{{" }} _git_template_repo_url {{ "}}" }}
+              git push {{ "{{" }} _git_template_repo_url {{ "}}" }} "{{ $.Values.nameOverride }}"
 
 {{- end }}
