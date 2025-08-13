@@ -92,7 +92,6 @@ data:
             oauth2_proxy_cookie_secret: {{ randAlpha 32 | lower | b64enc }}
             oauth2_proxy_oidc_issuer: "{{ $.Values.oauth2.issuer }}"
             orchestrator_sonataflow_data_index_service: "{{ $.Values.orchestrator.sonataFlowDataIndexService }}"
-            postgresql_existingSecret: "{{ include "redhat-developer-hub-config-template.name" . }}"
 {{- end }}
 
         - name: Add new files to the repository
