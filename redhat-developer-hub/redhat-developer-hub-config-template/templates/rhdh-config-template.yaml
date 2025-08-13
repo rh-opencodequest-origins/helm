@@ -121,8 +121,6 @@ data:
           ansible.builtin.uri:
             url: "https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/api/v4/projects/{{ $.Values.rhdh.template.group }}/{{ $item.project }}-{{ $.Values.nameOverride }}"
             method: PUT
-            headers:
-              PRIVATE-TOKEN: "{{ private_token }}"
             body_format: json
             body:
               visibility: "public"
