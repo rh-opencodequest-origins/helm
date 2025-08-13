@@ -11,6 +11,6 @@ helm:
     git:
       host: 
       group: rhdh
-      repo: developer-hub-config
+      repo: developer-hub-config-{{ $.Values.nameOverride }}
       revision: main
       path: values.yaml

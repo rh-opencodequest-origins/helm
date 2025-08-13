@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: rhdh-config-template
+  name: "rhdh-config-template-{{ $.Values.nameOverride }}"
   namespace: {{ .Values.namespace }}
   annotations:
     {{- include "argocd.syncwave" . | nindent 4 }}
@@ -25,4 +25,4 @@ spec:
       volumes:
       - name: rhdh-config-vol
         configMap:
-          name: rhdh-config-template
+          name: "rhdh-config-template-{{ $.Values.nameOverride }}"
