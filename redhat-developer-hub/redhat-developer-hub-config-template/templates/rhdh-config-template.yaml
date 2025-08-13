@@ -112,7 +112,7 @@ data:
               fi
 
               # Push directly using full repo URL too
-              git push {{ _git_template_repo_url }} "{{ $.Values.nameOverride }}"
+              git push {{ "{{" }} _git_template_repo_url {{ "}}" }} "{{ $.Values.nameOverride }}"
           args: 
             chdir: /tmp/{{ $item.project }}
 #          ignore_errors: true
