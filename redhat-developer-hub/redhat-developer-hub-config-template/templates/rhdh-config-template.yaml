@@ -99,7 +99,9 @@ data:
           ansible.builtin.command:
             chdir: >-
               /tmp/{{ $item.project }}
-            cmd: "git add ."
+            cmd: |
+              git checkout -b {{ $.Values.nameOverride }}
+              git add .
           ignore_errors: true
 
         - name: Commit changes to the repository
@@ -115,15 +117,6 @@ data:
             chdir: >-
               /tmp/{{ $item.project }}
             cmd: >-
-              git push {{ "{{" }} _git_template_repo_url {{ "}}" }}-{{ $.Values.nameOverride }}
-
-        # - name: Change project visibility
-        #   ansible.builtin.uri:
-        #     url: "https://root:{{ $.Values.gitlab.rootPassword }}@{{ $.Values.gitlab.host }}/api/v4/projects/{{ $.Values.rhdh.template.group }}/{{ $item.project }}-{{ $.Values.nameOverride }}"
-        #     method: PUT
-        #     body_format: json
-        #     body:
-        #       visibility: "public"
-        #     status_code: 200
+              git push {{ "{{" }} _git_template_repo_url {{ "}}" }}
 
 {{- end }}
