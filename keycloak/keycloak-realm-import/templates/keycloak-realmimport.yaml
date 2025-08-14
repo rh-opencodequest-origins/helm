@@ -560,16 +560,16 @@ spec:
 
     {{- range .Values.clients }}
       - id: {{ uuidv4 }}
-        clientId: {{ .Values.client.name }}
+        clientId: {{ .name }}
         surrogateAuthRequired: false
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: client-secret
         secret: {{ include "keycloak-realmimport.client-backstage-secret" . }}
         redirectUris:
-          - {{ .Values.client.redirectUri }}
+          - {{ .redirectUri }}
         webOrigins:
-          - '{{ .Values.client.webOrigin }}'
+          - '{{ .webOrigin }}'
         notBefore: 0
         bearerOnly: false
         consentRequired: false
