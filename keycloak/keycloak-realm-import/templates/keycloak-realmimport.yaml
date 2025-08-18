@@ -12,6 +12,8 @@ metadata:
     app: keycloak
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    clients: {{ .Values.clients }}
+
 spec:
   keycloakCRName: {{ $.Values.keycloak.name }}
   realm:
@@ -557,8 +559,6 @@ spec:
           - phone
           - offline_access
           - microprofile-jwt
-
-# {{ .Values.clients }}
     {{- range .Values.clients }}
       - id: {{ uuidv4 }}
         clientId: {{ .name }}
