@@ -12,7 +12,7 @@ metadata:
     app: keycloak
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    clients: {{ .Values.clients }}
+    clients: {{ $.Values.clients }}
 
 spec:
   keycloakCRName: {{ $.Values.keycloak.name }}
