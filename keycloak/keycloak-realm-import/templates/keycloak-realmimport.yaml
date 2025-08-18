@@ -558,6 +558,7 @@ spec:
           - offline_access
           - microprofile-jwt
 
+# {{ .Values.clients }}
     {{- range .Values.clients }}
       - id: {{ uuidv4 }}
         clientId: {{ .name }}
