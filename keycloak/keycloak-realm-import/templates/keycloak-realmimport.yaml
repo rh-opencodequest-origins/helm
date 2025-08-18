@@ -557,18 +557,19 @@ spec:
           - phone
           - offline_access
           - microprofile-jwt
-    {{- range $.Values.clients }}
+
+    {{- range $item := .Values.clients }}
       - id: {{ uuidv4 }}
-        clientId: {{ $.name }}
+        clientId: {{ $item.name }}
         surrogateAuthRequired: false
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: client-secret
         secret: {{ include "keycloak-realmimport.client-backstage-secret" . }}
         redirectUris:
-          - {{ $.redirectUri }}
+          - {{ $item.redirectUri }}
         webOrigins:
-          - '{{ $.webOrigin }}'
+          - '{{ $item.webOrigin }}'
         notBefore: 0
         bearerOnly: false
         consentRequired: false
