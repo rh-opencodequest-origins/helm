@@ -558,7 +558,7 @@ spec:
           - offline_access
           - microprofile-jwt
 
-    {{- range $item := .Values.clients }}
+    {{- range $item := .Values.client }}
       - id: {{ uuidv4 }}
         clientId: {{ $item.name }}
         surrogateAuthRequired: false
