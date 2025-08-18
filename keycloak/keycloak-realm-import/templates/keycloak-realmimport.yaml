@@ -559,7 +559,7 @@ spec:
           - phone
           - offline_access
           - microprofile-jwt
-    {{- range .Values.clients }}
+    {{- range $.Values.clients }}
       - id: {{ uuidv4 }}
         clientId: {{ .name }}
         surrogateAuthRequired: false
