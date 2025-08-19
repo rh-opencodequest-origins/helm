@@ -54,11 +54,6 @@ groups:
   - name: infrastructure
 
 client:
-  backstage:
-    name:
-    redirectUri:
-    webOrigin:
-    secret:
   backstagePlugin:
     name:
     redirectUri:
@@ -67,8 +62,15 @@ client:
   trustedartifactsigner:
     name: trusted-artifact-signer
     redirectUri:
-      - urn:ietf:wg:oauth:2.0:oob
+      - "urn:ietf:wg:oauth:2.0:oob"
       - "*"
+
+backstageClient:
+  backstage:
+    name:
+    redirectUri:
+    webOrigin:
+    secret:
 
 argocd:
   enabled: true
