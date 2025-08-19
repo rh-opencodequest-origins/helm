@@ -54,11 +54,6 @@ groups:
   - name: infrastructure
 
 client:
-  backstagePlugin:
-    name:
-    redirectUri:
-    webOrigin:
-    secret:
   trustedartifactsigner:
     name: trusted-artifact-signer
     redirectUri:
@@ -66,6 +61,11 @@ client:
       - "*"
 
 backstageClient:
+  backstagePlugin:
+    name:
+    redirectUri:
+    webOrigin:
+    secret:
   backstage:
     name:
     redirectUri:
