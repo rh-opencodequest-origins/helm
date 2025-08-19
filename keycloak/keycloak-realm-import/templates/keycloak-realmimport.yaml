@@ -566,16 +566,17 @@ spec:
         alwaysDisplayInConsole: false
         clientAuthenticatorType: client-secret
         secret: {{ include "keycloak-realmimport.client-backstage-secret" $ }}
-        # redirectUris:
-        #   - {{ $item.redirectUri }}
+        secret: {{- if eq $item.name "backstage-plugin" -}}
+          {{ include "keycloak-realmimport.client-backstage-plugin-secret" $ }}
+        {{- else -}}
+          {{ include "keycloak-realmimport.client-backstage-secret" $ }}
+        {{- end }}
         {{- if $item.redirectUri }}
         redirectUris:
           - {{ $item.redirectUri }}
         {{- else }}
         redirectUris: []
         {{- end }}
-        # webOrigins:
-        #   - '{{ $item.webOrigin }}'
         {{- if $item.redirectUri }}
         webOrigins:
           - '{{ $item.webOrigin }}'
