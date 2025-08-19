@@ -81,7 +81,7 @@ Backstage client secret
 */}}
 {{- define "keycloak-realmimport.client-backstage-secret" -}}
 {{- if .Values.backstageClient.backstage.secret }}
-{{- .Values.client.backstage.secret }}
+{{- .Values.backstageClient.backstage.secret }}
 {{- else }}
 {{- randAlphaNum 32 }}
 {{- end }}
@@ -92,7 +92,7 @@ Backstage client secret
 */}}
 {{- define "keycloak-realmimport.client-backstage-plugin-secret" -}}
 {{- if .Values.backstageClient.backstagePlugin.secret }}
-{{- .Values.client.backstagePlugin.secret }}
+{{- .Values.backstageClient.backstagePlugin.secret }}
 {{- else }}
 {{- randAlphaNum 32 }}
 {{- end }}
