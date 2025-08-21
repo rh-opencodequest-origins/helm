@@ -572,7 +572,7 @@ spec:
         {{- else }}
         redirectUris: []
         {{- end }}
-        {{- if $item.redirectUri }}
+        {{- if $item.webOrigin }}
         webOrigins:
           - '{{ $item.webOrigin }}'
         {{- else }}
