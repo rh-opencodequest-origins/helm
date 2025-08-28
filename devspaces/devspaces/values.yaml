@@ -1,0 +1,19 @@
+nameOverride: "devspaces"
+fullnameOverride: ""
+
+namespace: "openshift-operators"
+
+devspaces:
+  subscription:
+    channel: stable
+    installPlanApproval: Automatic
+    name: devspaces
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+
+argocd:
+  enabled: true
+  operatorgroup:
+    syncwave: "-3"
+  operator:
+    syncwave: "-2"
