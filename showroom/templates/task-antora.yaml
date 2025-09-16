@@ -4,6 +4,7 @@ metadata:
   name: antora-build-{{ include "showroom.fullname" . }}
   annotations:
     "helm.sh/hook": pre-install
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   steps:
     - args:

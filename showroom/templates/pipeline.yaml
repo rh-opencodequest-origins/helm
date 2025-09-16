@@ -2,6 +2,8 @@ apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: {{ include "showroom.fullname" . }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   params:
     - description: Git repository containing documentation

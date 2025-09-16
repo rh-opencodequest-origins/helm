@@ -23,6 +23,8 @@ spec:
               metadata:
                 # generateName: {{ include "showroom.fullname" . }}-
                 name: {{ include "showroom.fullname" . }}-start
+                annotations:
+                    argocd.argoproj.io/sync-wave: "-1"
               spec:
                 pipelineRef:
                   name: {{ include "showroom.fullname" . }}

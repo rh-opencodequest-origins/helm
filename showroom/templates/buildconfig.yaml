@@ -4,6 +4,9 @@ metadata:
   name: {{ include "showroom.fullname" . }}
   labels:
     build: {{ include "showroom.fullname" . }}
+  annotations:
+    "helm.sh/hook": pre-install
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   nodeSelector: null
   output:
