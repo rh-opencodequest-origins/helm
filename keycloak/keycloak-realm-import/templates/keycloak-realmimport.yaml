@@ -415,7 +415,8 @@ spec:
         email: {{ $item.id }}@rhdemo.com
         credentials:
           - type: password
-            value: {{ include "keycloak.user.password" $ }}
+            # value: {{ include "keycloak.user.password" $ }}
+            value: {{ include "keycloak.user.password" (dict "Values" $.Values "user" $item) }}
         disableableCredentialTypes: []
         requiredActions: []
         realmRoles:

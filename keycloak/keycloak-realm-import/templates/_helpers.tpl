@@ -98,11 +98,24 @@ Backstage client secret
 {{- end }}
 {{- end }}
 
+# {{/*
+# User password
+# */}}
+# {{- define "keycloak.user.password" -}}
+# {{- if .Values.users.password }}
+# {{- .Values.users.password }}
+# {{- else }}
+# {{- randAlpha 8 }}
+# {{- end }}
+# {{- end }}
+
 {{/*
-User password
+User password - Priority: individual user password > global password > random
 */}}
 {{- define "keycloak.user.password" -}}
-{{- if .Values.users.password }}
+{{- if .user.password }}
+{{- .user.password }}
+{{- else if .Values.users.password }}
 {{- .Values.users.password }}
 {{- else }}
 {{- randAlpha 8 }}
