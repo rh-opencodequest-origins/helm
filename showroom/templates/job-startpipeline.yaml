@@ -3,8 +3,7 @@ kind: Job
 metadata:
   name: {{ include "showroom.fullname" . }}-pipelinerun-launcher
   annotations:
-    # argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+#    argocd.argoproj.io/hook-delete-policy: HookSucceeded
     helm.sh/hook: post-install
 spec:
   template:
