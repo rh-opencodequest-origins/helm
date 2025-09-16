@@ -21,7 +21,8 @@ spec:
               apiVersion: tekton.dev/v1
               kind: PipelineRun
               metadata:
-                generateName: {{ include "showroom.fullname" . }}-
+                # generateName: {{ include "showroom.fullname" . }}-
+                name: {{ include "showroom.fullname" . }}-start
               spec:
                 pipelineRef:
                   name: {{ include "showroom.fullname" . }}
