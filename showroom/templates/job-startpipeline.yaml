@@ -17,7 +17,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              cat <<'EOF' | oc create -f -
+              cat <<'EOF' | oc apply -f -
               apiVersion: tekton.dev/v1
               kind: PipelineRun
               metadata:
