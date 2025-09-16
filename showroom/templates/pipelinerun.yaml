@@ -1,10 +1,12 @@
 apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
-#   generateName: {{ include "showroom.fullname" . }}-
+  generateName: {{ include "showroom.fullname" . }}-
   name: {{ include "showroom.fullname" . }}-pipelinerun
   annotations:
     "helm.sh/hook": post-install
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec: 
   pipelineRef:
     name: {{ include "showroom.fullname" . }}
