@@ -10,6 +10,7 @@ spec:
   template:
     spec:
       restartPolicy: Never
+      serviceAccountName: pipeline
       containers:
         - name: create-pipelinerun
           image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
