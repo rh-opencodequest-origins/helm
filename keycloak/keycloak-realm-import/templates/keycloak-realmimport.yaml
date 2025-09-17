@@ -446,7 +446,8 @@ spec:
         alwaysDisplayInConsole: false
         clientAuthenticatorType: client-secret
         secret: {{ include "keycloak-realmimport.client-backstage-plugin-secret" $ }}
-        redirectUris: {{ .Values.client.openshift.redirectUri }}
+        redirectUris: 
+          - {{ .Values.client.openshift.redirectUri }}
         webOrigins: 
           - {{ .Values.client.openshift.webOrigin }}
         notBefore: 0
