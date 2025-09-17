@@ -437,6 +437,50 @@ spec:
             - manage-account
             - view-groups
     clients:
+      - id: {{ uuidv4 }}
+        clientId: openshift
+        name: openshift
+        description: OpenShift Client authentication
+        surrogateAuthRequired: false
+        enabled: true
+        alwaysDisplayInConsole: false
+        clientAuthenticatorType: client-secret
+        secret: {{ if eq $item.name "backstage-plugin" }}{{ include "keycloak-realmimport.client-backstage-plugin-secret" $ }}{{ else }}{{ include "keycloak-realmimport.client-backstage-secret" $ }}{{ end }}
+        redirectUris: {{ .Values.client.openshift.redirectUri }}
+        webOrigins: {{ .Values.client.openshift.webOrigin }}
+        notBefore: 0
+        bearerOnly: false
+        consentRequired: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        directAccessGrantsEnabled: true
+        serviceAccountsEnabled: false
+        publicClient: false
+        frontchannelLogout: true
+        protocol: openid-connect
+        attributes:
+          oidc.ciba.grant.enabled: 'false'
+          oauth2.device.authorization.grant.enabled: 'false'
+          backchannel.logout.session.required: 'true'
+          backchannel.logout.revoke.offline.tokens: 'false'
+        authenticationFlowBindingOverrides: {}
+        fullScopeAllowed: true
+        nodeReRegistrationTimeout: -1
+        defaultClientScopes:
+          - web-origins
+          - acr
+          - profile
+          - roles
+          - email
+        optionalClientScopes:
+          - address
+          - phone
+          - offline_access
+          - microprofile-jwt
+        access:
+          view: true
+          configure: true
+          manage: true
       - id: {{ $accountContainerId }}
         clientId: account
         name: "${client_account}"
