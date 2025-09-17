@@ -1109,6 +1109,18 @@ spec:
               claim.name: website
               jsonType.label: String
           - id: {{ uuidv4 }}
+            name: openshift-groups
+            protocol: openid-connect
+            protocolMapper: oidc-group-membership-mapper
+            consentRequired: false
+            config:
+              full.path: 'false'
+              introspection.token.claim: 'true'
+              userinfo.token.claim: 'true'
+              id.token.claim: 'true'
+              lightweight.claim: 'false'
+              access.token.claim: 'true'
+          - id: {{ uuidv4 }}
             name: locale
             protocol: openid-connect
             protocolMapper: oidc-usermodel-attribute-mapper
