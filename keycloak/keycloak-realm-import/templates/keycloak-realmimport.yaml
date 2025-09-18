@@ -1120,6 +1120,7 @@ spec:
               id.token.claim: 'true'
               lightweight.claim: 'false'
               access.token.claim: 'true'
+              claim.name: groups
           - id: {{ uuidv4 }}
             name: locale
             protocol: openid-connect
