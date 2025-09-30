@@ -12,6 +12,10 @@ devspaces:
     sourceNamespace: openshift-marketplace
   cheCluster:
     namespace: openshift-devspaces
+  gitlab:
+    url: 
+    oauthClientId: 
+    oauthClientSecret: 
 
 argocd:
   enabled: true
