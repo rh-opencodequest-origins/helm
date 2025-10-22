@@ -16,6 +16,12 @@ antora:
     openshift_cluster_ingress_domain: ""
     openshift_gitops_password: ""
     team-id: ""
+    user1: ""
+    user2: ""
+    user3: ""
+    openai-url: ""
+    openai-model: ""
+    openai-key: ""
     page-links:
     - url: https://redhat.com
       text: Red Hat
