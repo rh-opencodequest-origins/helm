@@ -4,6 +4,9 @@ kind: Subscription
 metadata:
   name: {{ include "devspaces.name" . }}-operator
   namespace: {{ include "devspaces.namespace" . }}
+  annotations:
+    argocd.argoproj.io/sync-wave: '-2'
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   channel: {{ .Values.devspaces.subscription.channel }}
   installPlanApproval: {{ .Values.devspaces.subscription.installPlanApproval }}
