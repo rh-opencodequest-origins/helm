@@ -4,8 +4,8 @@ kind: Subscription
 metadata:
   name: {{ include "devspaces.name" . }}-operator
   namespace: {{ include "devspaces.namespace" . }}
-  # annotations:
-  #   {{- include "devspaces.argocd-syncwave" . | nindent 4 }}
+#  annotations:
+#    {{- include "devspaces.argocd-syncwave" . | nindent 4 }}
 spec:
   channel: {{ .Values.devspaces.subscription.channel }}
   installPlanApproval: {{ .Values.devspaces.subscription.installPlanApproval }}
