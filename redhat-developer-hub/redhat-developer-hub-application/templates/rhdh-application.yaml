@@ -35,3 +35,9 @@ spec:
     - repoURL: 'https://{{ .Values.helm.values.git.host }}/{{ .Values.helm.values.git.group }}/{{ .Values.helm.values.git.repo }}.git'
       targetRevision: {{ .Values.helm.values.git.revision }}
       ref: values
+  ignoreDifferences:
+      - group: apps
+        kind: Deployment
+        name: {{ include "redhat-developer-hub-application.name" . }}
+        jsonPointers:
+          - /spec/strategy
