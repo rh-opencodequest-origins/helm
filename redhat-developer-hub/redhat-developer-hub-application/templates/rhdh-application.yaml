@@ -38,6 +38,6 @@ spec:
   ignoreDifferences:
       - group: apps
         kind: Deployment
-        name: {{ include "redhat-developer-hub-application.name" . }}
+        name: {{ include "redhat-developer-hub-application.name" . }}-developer-hub
         jsonPointers:
           - /spec/strategy
