@@ -5,7 +5,7 @@ namespace: ""
 
 keycloak:
   subscription:
-    channel: stable-v26.4
+    channel: stable-v24
     installPlanApproval: Automatic
     name: rhbk-operator
     source: redhat-operators
